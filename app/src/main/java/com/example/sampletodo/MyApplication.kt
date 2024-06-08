@@ -22,7 +22,6 @@ class MyApplication : Application() {
         val TAG: String = MyApplication::class.java.simpleName
         private lateinit var myApplication: MyApplication
         private lateinit var sessionManagerListener: SessionManagerListener
-        //private lateinit var timer: Timer
         private lateinit var countDownTimer: CountDownTimer
 
         fun getContext(): Context {
@@ -44,9 +43,6 @@ class MyApplication : Application() {
 
         fun stopTimerIfRunning() {
             Utils.log(TAG, "stopTimerIfRunning()")
-            /*if (this::timer.isInitialized) {
-                timer.cancel()
-            }*/
 
             if (this::countDownTimer.isInitialized) {
                 countDownTimer.cancel()
@@ -56,16 +52,6 @@ class MyApplication : Application() {
         private fun userSessionStart(duration: Long) {
             Utils.log(TAG, "userSessionStart()")
             stopTimerIfRunning()
-            /*timer = Timer()
-            timer.schedule(object : TimerTask() {
-                override fun run() {
-                    if (::sessionManagerListener.isInitialized) {
-                        sessionManagerListener.onSessionLogout()
-                        Utils.log(TAG, "Login out")
-                        stopTimerIfRunning()
-                    }
-                }
-            }, duration)*/
 
             countDownTimer = object : CountDownTimer(duration, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
